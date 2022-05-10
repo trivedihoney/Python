@@ -1,6 +1,6 @@
 import random
 
-
+#You will guess computer chosen number
 def guess(x):
     random_number = -1
     while random_number != x:
@@ -15,7 +15,7 @@ def guess(x):
 
 # guess(random.randint(0, 100))
 
-
+#Computer will guess your chosen number
 def computer_guess():
     print("Guess a number between 0 to 10000\n")
     min_guess = 0
