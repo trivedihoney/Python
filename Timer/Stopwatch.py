@@ -1,33 +1,19 @@
 import time
-  
-# Timer starts
+
 starttime = time.time()
-lasttime = starttime
-lapnum = 1
-value = ""
+prevtime = starttime
+lapNumber = 1
+UserInput = ""
+print("Timer Begins! \nPress Q and then press ENTER to stop the code")
+#Press Q and then press ENTER to stop the code
+while UserInput.lower() != "q" :
+    UserInput=input()
+    tempTime = time.time()
+    print("Lap time : ",round(tempTime- prevtime,2))  #Prints Lap time
+    print("Total time : ",round(tempTime - starttime,2))  #Prints Total time
+    print("lap number :",lapNumber)
+    lapNumber+=1
+    prevtime = tempTime
 
-print("Press ENTER for each lap.\nType Q and press ENTER to stop.")
-
-while value.lower() != "q":
-              
-    # Input for the ENTER key press
-    value = input()
-  
-    # The current lap-time
-    laptime = round((time.time() - lasttime), 2)
-  
-    # Total time elapsed since the timer started
-    totaltime = round((time.time() - starttime), 2)
-  
-    # Printing the lap number, lap-time, and total time
-    print("Lap No. "+str(lapnum))
-    print("Total Time: "+str(totaltime))
-    print("Lap Time: "+str(laptime))
-            
-    print("*"*20)
-  
-    # Updating the previous total time and lap number
-    lasttime = time.time()
-    lapnum += 1
-  
-print("*"*20)
+print("="*25)
+    
