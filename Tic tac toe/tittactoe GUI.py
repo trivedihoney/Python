@@ -1,5 +1,6 @@
 from ast import Global
 from cProfile import label
+from operator import truediv
 from textwrap import fill
 from tkinter import *
 from tkinter import ttk
@@ -80,8 +81,24 @@ def ButtonClick(id):
     global player
     if id["text"]=="":
         id["text"]=player
-        if player == "O": 
-            player="X" 
-        else: player = "O"
-        statusbar1.configure(text=f"It's {player}'s Turn")
+
+        if IfGameEnd() == True:
+            statusbar1.configure(text=f"It's {player}'s Turn")
+        else:
+            if player == "O": 
+                player="X" 
+            else: player = "O"            
+            statusbar1.configure(text=f"It's {player}'s Turn")
+
+Owins = {"X","X","X"}
+def IfGameEnd():
+    if frame1.grid[0,0]==frame1.grid[0,1]==frame1.grid[0,2]:
+        print("Someone won")
+        return True
+    else:
+        return False
+
+def t(btn):
+    return btn.cget("text")
+
 root.mainloop()
