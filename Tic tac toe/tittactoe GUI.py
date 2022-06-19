@@ -1,44 +1,87 @@
+from ast import Global
 from cProfile import label
+from textwrap import fill
 from tkinter import *
-from tkinter import messagebox
+from tkinter import ttk
+
+root = Tk()
+player = "O"
+root.title("Tic Tac Toe")
+s = ttk.Style()
+s.configure('TTT.TButton', font=('Helvetica', 48))
+ss = ttk.Style()
+ss.configure('TT.TButton', font=('Helvetica', 12))
+#root.geometry('{}x{}'.format(450, 500))
+
+frame1=Frame(root,width=450, height=150)
+frame1.grid(row=0,column=0)
+frame1.grid_propagate(False)
+frame1.columnconfigure(0,weight=1)
+frame1.columnconfigure(1,weight=1)
+frame1.columnconfigure(2,weight=1)
+frame1.rowconfigure(0,weight=1)
+
+frame2=Frame(root,width=450, height=150)
+frame2.grid(row=1,column=0)
+frame2.grid_propagate(False)
+frame2.columnconfigure(0,weight=1)
+frame2.columnconfigure(1,weight=1)
+frame2.columnconfigure(2,weight=1)
+frame2.rowconfigure(0,weight=1)
+
+frame3=Frame(root,width=450, height=150)
+frame3.grid(row=2,column=0)
+frame3.grid_propagate(False)
+frame3.columnconfigure(0,weight=1)
+frame3.columnconfigure(1,weight=1)
+frame3.columnconfigure(2,weight=1)
+frame3.rowconfigure(0,weight=1)
+
+Btn1=ttk.Button(frame1,command=lambda : ButtonClick(Btn1),style='TTT.TButton',)
+Btn1.grid(row=0,column=0,sticky="nesw")
+Btn2=ttk.Button(frame1,command=lambda : ButtonClick(Btn2),style='TTT.TButton')
+Btn2.grid(row=0,column=1,sticky="nesw")
+Btn3=ttk.Button(frame1,command=lambda : ButtonClick(Btn3),style='TTT.TButton')
+Btn3.grid(row=0,column=2,sticky="nesw")
+Btn4=ttk.Button(frame2,command=lambda : ButtonClick(Btn4),style='TTT.TButton')
+Btn4.grid(row=0,column=0,sticky="nesw")
+Btn5=ttk.Button(frame2,command=lambda : ButtonClick(Btn5),style='TTT.TButton')
+Btn5.grid(row=0,column=1,sticky="nesw")
+Btn6=ttk.Button(frame2,command=lambda : ButtonClick(Btn6),style='TTT.TButton')
+Btn6.grid(row=0,column=2,sticky="nesw")
+Btn7=ttk.Button(frame3,command=lambda : ButtonClick(Btn7),style='TTT.TButton')
+Btn7.grid(row=0,column=0,sticky="nesw")
+Btn8=ttk.Button(frame3,command=lambda : ButtonClick(Btn8),style='TTT.TButton')
+Btn8.grid(row=0,column=1,sticky="nesw")
+Btn9=ttk.Button(frame3,command=lambda : ButtonClick(Btn9),style='TTT.TButton')
+Btn9.grid(row=0,column=2,sticky="nesw")
+
+frame4=Frame(root,width=450,height=100)
+
+frame4.grid(row=4,column=0)
+frame4.grid_propagate(False)
+frame4.columnconfigure(0,weight=1)
+frame4.columnconfigure(1,weight=1)
+frame4.columnconfigure(2,weight=1)
+frame4.rowconfigure(0,weight=1)
+statusbar1 = ttk.Label(frame4, text=f"It's {player}'s Turn",font=(48),relief=SUNKEN,width=450,anchor=CENTER,borderwidth=1)
+statusbar1.grid(row=0,column=0,columnspan=3,sticky="nsew")
+
+statusbar2 = ttk.Label(frame4, text="O wins : ",font=(24))
+statusbar2.grid(row=1,column=0,sticky="nesw")
+statusbar3 = ttk.Label(frame4, text="X wins :",font=(24))
+statusbar3.grid(row=2,column=0,sticky="nesw")
+
+BtnRestart = ttk.Button(frame4,text="RESTART",style='TT.TButton')
+BtnRestart.grid(row=1,column=1,columnspan=2,rowspan=2,sticky="nesw")
 
 def ButtonClick(id):
-    if id==1:
-        messagebox.showinfo("Click info",f"Button {id} Clicked")        
-        Btn1["text"]="O"
-root = Tk()
-root.title("Tic Tac Toe")
-
-
-
-Btn1=Button(root,command=lambda : ButtonClick(1))
-Btn1.grid(row=0,column=0,ipadx=50,ipady=50)
-Btn2=Button(root)
-Btn2.grid(row=0,column=1,ipadx=50,ipady=50)
-Btn3=Button(root)
-Btn3.grid(row=0,column=2,ipadx=50,ipady=50)
-Btn4=Button(root)
-Btn4.grid(row=1,column=0,ipadx=50,ipady=50)
-Btn5=Button(root)
-Btn5.grid(row=1,column=1,ipadx=50,ipady=50)
-Btn6=Button(root)
-Btn6.grid(row=1,column=2,ipadx=50,ipady=50)
-Btn7=Button(root)
-Btn7.grid(row=2,column=0,ipadx=50,ipady=50)
-Btn8=Button(root)
-Btn8.grid(row=2,column=1,ipadx=50,ipady=50)
-Btn9=Button(root)
-Btn9.grid(row=2,column=2,ipadx=50,ipady=50)
-
-
-statusbar = Label(root, text="It's O's Turn",bd=1,anchor=W)
-statusbar.grid(row=3,column=0,columnspan=3)
-statusbar2 = Label(root, text="O wins : ",bd=1,anchor=W)
-statusbar2.grid(row=4,column=0)
-statusbar3 = Label(root, text="X wins :",bd=1,anchor=W)
-statusbar3.grid(row=4,column=2)
-
-BtnRestart = Button(root,text="RESTART")
-BtnRestart.grid(row=4,column=1)
-
+    #messagebox.showinfo("Click info",f"Button {id} Clicked")    
+    global player
+    if id["text"]=="":
+        id["text"]=player
+        if player == "O": 
+            player="X" 
+        else: player = "O"
+        statusbar1.configure(text=f"It's {player}'s Turn")
 root.mainloop()
