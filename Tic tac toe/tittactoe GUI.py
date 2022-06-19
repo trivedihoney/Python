@@ -4,7 +4,9 @@ from operator import truediv
 from textwrap import fill
 from tkinter import *
 from tkinter import ttk
-
+from tkinter import messagebox
+Owins=0
+Xwins=0
 root = Tk()
 player = "O"
 root.title("Tic Tac Toe")
@@ -73,32 +75,74 @@ statusbar2.grid(row=1,column=0,sticky="nesw")
 statusbar3 = ttk.Label(frame4, text="X wins :",font=(24))
 statusbar3.grid(row=2,column=0,sticky="nesw")
 
-BtnRestart = ttk.Button(frame4,text="RESTART",style='TT.TButton')
+BtnRestart = ttk.Button(frame4,text="RESTART",style='TT.TButton',command=lambda : restart())
 BtnRestart.grid(row=1,column=1,columnspan=2,rowspan=2,sticky="nesw")
 
 def ButtonClick(id):
     #messagebox.showinfo("Click info",f"Button {id} Clicked")    
-    global player
+    global player,Owins,Xwins
+    
     if id["text"]=="":
         id["text"]=player
 
         if IfGameEnd() == True:
-            statusbar1.configure(text=f"It's {player}'s Turn")
-        else:
+        
+            statusbar1.configure(text=f"{player} Won !!!")
+            messagebox.showinfo("Result", f"{player} Won !!!")
+            DisableEnableBoard("disabled")
             if player == "O": 
-                player="X" 
-            else: player = "O"            
-            statusbar1.configure(text=f"It's {player}'s Turn")
+                Owins +=1
+                statusbar2.configure(text="O wins : {}".format(Owins))
+            else: Xwins  +=1 ; statusbar3.configure(text="X wins : {}".format(Xwins))
 
-Owins = {"X","X","X"}
+        else:
+            if checkDraw()==False:
+                if player == "O": 
+                    player="X" 
+                else: player = "O"            
+                statusbar1.configure(text=f"It's {player}'s Turn")
+            else:
+                messagebox.showinfo("Result","It's a Draw")
+                DisableEnableBoard("disabled")
+                statusbar1.configure(text="Draw")
+
 def IfGameEnd():
-    if frame1.grid[0,0]==frame1.grid[0,1]==frame1.grid[0,2]:
-        print("Someone won")
+    if t(Btn1)== t(Btn2)==t(Btn3) and t(Btn1)!="":
+        return True
+    elif  t(Btn4)== t(Btn5)==t(Btn6) and t(Btn4)!="":
+        return True
+    elif  t(Btn7)== t(Btn8)==t(Btn9) and t(Btn7)!="":
+        return True
+    elif  t(Btn1)== t(Btn4)==t(Btn7) and t(Btn1)!="":
+        return True
+    elif  t(Btn2)== t(Btn5)==t(Btn8) and t(Btn2)!="":
+        return True
+    elif  t(Btn3)== t(Btn6)==t(Btn9) and t(Btn3)!="":
+        return True        
+    elif  t(Btn1)== t(Btn5)==t(Btn9) and t(Btn1)!="":
+        return True
+    elif  t(Btn3)== t(Btn5)==t(Btn7) and t(Btn3)!="":
         return True
     else:
         return False
 
 def t(btn):
     return btn.cget("text")
+
+def DisableEnableBoard(text):
+    Btn1["state"]= Btn2["state"]=Btn3["state"]= Btn4["state"]= Btn5["state"]= text
+    Btn6["state"]=Btn7["state"]=Btn8["state"]=Btn9["state"]= text
+
+def restart():
+    Btn1["text"]= Btn2["text"]=Btn3["text"]= Btn4["text"]= Btn5["text"]= ""
+    Btn6["text"]= Btn7["text"]=Btn8["text"]= Btn9["text"]= ""
+    DisableEnableBoard("enable")
+
+def checkDraw():
+    if Btn1["text"]!="" and Btn2["text"]!="" and Btn3["text"]!="" and Btn4["text"]!="" and Btn5["text"]!="" and Btn6["text"]!="" and Btn7["text"]!="" and Btn8["text"]!="":
+        return True
+    else:
+        return False
+
 
 root.mainloop()
