@@ -5,6 +5,7 @@ import time
 from turtle import color
 
 root= Tk()
+root.title("Timer")
 hour=StringVar()
 minute=StringVar()
 second=StringVar()
