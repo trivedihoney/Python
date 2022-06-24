@@ -1,7 +1,35 @@
+from cProfile import label
 from tkinter import *
 from tkinter import ttk
 import string
+import random
+from tkinter import font
+from Hangman.Hangman import playHangman
+from words import words
 from PIL import Image, ImageTk
+
+
+word_list_label = Label(text="", font=(48))
+word_list_label.grid(row =4 , column=0,columnspan=13)
+
+def get_valid_word():
+    word = random.choice(words)
+    while " " in word or "-" in word:
+         word = random.choice(words)
+    return word
+
+def PlayHangman():
+    word = get_valid_word()
+    all_letters = set(string.ascii_letters)
+    word_letters = set(word)
+    
+    word_list = ["-" if letter in word_letters else letter for letter in word]
+    print(word_list)
+
+
+def BtnPressed(a):
+    pass
+
 
 lives = 6
 root = Tk()
@@ -32,5 +60,5 @@ for x in range(5,7):
         if i+1 <len(letters) : i+=1
 
 
-
+playHangman()
 root.mainloop()
