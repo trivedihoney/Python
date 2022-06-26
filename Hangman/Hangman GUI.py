@@ -6,6 +6,7 @@ from tkinter import ttk
 import string
 import random
 from tkinter import messagebox
+from turtle import title
 from words import words
 from PIL import Image, ImageTk
 
@@ -19,6 +20,7 @@ def get_proper_word():
 
 
 root = Tk()
+root.title("Hangman Game")
 root.configure(background="white")
 lives = IntVar(root,6)
 
