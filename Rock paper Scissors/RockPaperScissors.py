@@ -15,7 +15,7 @@ def playgame():
 def isWin(p,c):
     if p==c:
         return "It's a Draw"
-    if (p=="r" and c=="s") or (p=="s" and c=="p") or (p=="p" and c=="r"):
+    elif (p=="r" and c=="s") or (p=="s" and c=="p") or (p=="p" and c=="r"):
         return "You Win!!"
     else:
         return "You Lost!!"
