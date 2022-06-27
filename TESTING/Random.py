@@ -1,10 +1,10 @@
+class Person:
+  def __init__(self, name, age):
+    self.name = name
+    self.age = age
 
+  def myfunc(self):
+    print("Hello my name is " + self.name)
 
-
-def pyth_test (x1, x2):
-    print (x1 + x2)
-
-
-
-
-pyth_test(1,2)
+p1 = Person("John", 36)
+p1.myfunc()
