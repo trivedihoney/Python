@@ -10,14 +10,7 @@ if re.status_code == 200:
 
     re_html = re.text
     soup = BeautifulSoup(re_html, features="lxml")
-
-
-
-    print(soup.prettify())
     search_list = soup.find("span",class_="rush-component s-latency-cf-section")
-    print(search_list)
-
-
     results = search_list.find_all("div",class_="sg-col-4-of-12 s-result-item s-asin sg-col-4-of-16 sg-col s-widget-spacing-small sg-col-4-of-20" )
 
     for result in results:
